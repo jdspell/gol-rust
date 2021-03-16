@@ -8,5 +8,5 @@
 - Need to track two game states: current and next.
 - States are represented as hashmaps: 
     - point (x, y) -> # live cell neighbors
-    - only live cells will be tracked
+    - all cells with at least one neighbor will be tracked
     - when a cell dies it is removed from the hashmap
