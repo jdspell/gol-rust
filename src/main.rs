@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::str;
+// use std::str;
 
 #[derive(Hash, Eq, PartialEq, Debug)]
 struct Point {
@@ -32,43 +32,43 @@ fn calc_neighbors(pt: Point, list: HashMap<Point, Cell>) -> i32 {
     // check the following 8 cases
     // x+1, y+1
     temp_pt = Point { x: pt.x+1, y: pt.y+1 };
-    if list.contains_key(temp_pt) {
-        num_neighbors++;
+    if list.contains_key(&temp_pt) {
+        num_neighbors = num_neighbors + 1;
     }
     // x+1, y-1
     temp_pt = Point { x: pt.x+1, y: pt.y-1 };
-    if list.contains_key(temp_pt) {
-        num_neighbors++;
+    if list.contains_key(&temp_pt) {
+        num_neighbors = num_neighbors + 1;
     }
     // x-1, y-1
     temp_pt = Point { x: pt.x-1, y: pt.y-1 };
-    if list.contains_key(temp_pt) {
-        num_neighbors++;
+    if list.contains_key(&temp_pt) {
+        num_neighbors = num_neighbors + 1;
     }
     // x-1, y+1
     temp_pt = Point { x: pt.x-1, y: pt.y+1 };
-    if list.contains_key(temp_pt) {
-        num_neighbors++;
+    if list.contains_key(&temp_pt) {
+        num_neighbors = num_neighbors + 1;
     }
     // x+1, y+0
     temp_pt = Point { x: pt.x+1, y: pt.y };
-    if list.contains_key(temp_pt) {
-        num_neighbors++;
+    if list.contains_key(&temp_pt) {
+        num_neighbors = num_neighbors + 1;
     }
     // x-1, y+0
     temp_pt = Point { x: pt.x-1, y: pt.y };
-    if list.contains_key(temp_pt) {
-        num_neighbors++;
+    if list.contains_key(&temp_pt) {
+        num_neighbors = num_neighbors + 1;
     }
     // x+0, y+1
     temp_pt = Point { x: pt.x, y: pt.y+1 };
-    if list.contains_key(temp_pt) {
-        num_neighbors++;
+    if list.contains_key(&temp_pt) {
+        num_neighbors = num_neighbors + 1;
     }
     // x+0, y-1
     temp_pt = Point { x: pt.x, y: pt.y-1 };
-    if list.contains_key(temp_pt) {
-        num_neighbors++;
+    if list.contains_key(&temp_pt) {
+        num_neighbors = num_neighbors + 1;
     }
     // return the result
     return num_neighbors;
