@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 // use std::str;
 
-#[derive(Hash, Eq, PartialEq, Debug)]
+#[derive(Hash, Copy, Clone, Eq, Debug)]
 struct Point {
     x: i32,
     y: i32,
@@ -19,6 +19,13 @@ impl Point {
     }
 }
 
+impl PartialEq for Point {
+    fn eq(&self, other: &Point) -> bool {
+        self.x == other.x &&
+        self.y == other.y
+    }
+}
+
 impl Cell {
     // creates new Cell
     fn new(neighbors: i32, live: bool) -> Cell {
@@ -26,23 +33,35 @@ impl Cell {
     }
 }
 
-fn calc_neighbors(pt: &Point, list: HashMap<Point, Cell>) -> i32 {
+fn calc_neighbors(pt: Point, map: &HashMap<Point, Cell>) -> i32 {
     let mut num_neighbors = 0;
     let mut temp_pt = pt;
     // check the following 8 cases
     // x+1, y+1
+    temp_pt = Point { x: pt.x+1, y: pt.y+1 };
+    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
     // x+1, y-1
+    temp_pt = Point { x: pt.x+1, y: pt.y-1 };
+    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
     // x-1, y-1
+    temp_pt = Point { x: pt.x-1, y: pt.y-1 };
+    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
     // x-1, y+1
+    temp_pt = Point { x: pt.x-1, y: pt.y+1 };
+    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
     // x+1, y+0
+    temp_pt = Point { x: pt.x+1, y: pt.y };
+    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
     // x-1, y+0
+    temp_pt = Point { x: pt.x-1, y: pt.y };
+    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
     // x+0, y+1
+    temp_pt = Point { x: pt.x, y: pt.y+1 };
+    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
     // x+0, y-1
-    // temp_pt = Point { x: pt.x, y: pt.y-1 };
-    // if list.contains_key(&temp_pt) {
-    //     num_neighbors = num_neighbors + 1;
-    // }
-    // return the result
+    temp_pt = Point { x: pt.x, y: pt.y-1 };
+    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
+    println!("Contains key: {} ", map.contains_key(&temp_pt));
     return num_neighbors;
 }
 
@@ -61,8 +80,8 @@ fn main() {
 
     // add the points to the hashmap
     for (pt, cell) in ptsWitNeighbors.iter() {
-        let mut point = pt;
+        // let mut point = pt;
         println!("({}, {}) -> {} {} ", pt.x, pt.y, cell.neighbors, cell.live);
-        println!("{} neighbors ", calc_neighbors(&mut point, ptsWitNeighbors));
+        println!("{} neighbors ", calc_neighbors(*pt, &ptsWitNeighbors));
     }
 }
