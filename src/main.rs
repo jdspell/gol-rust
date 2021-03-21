@@ -80,7 +80,6 @@ fn main() {
 
     // add the points to the hashmap
     for (pt, cell) in ptsWitNeighbors.iter() {
-        // let mut point = pt;
         println!("({}, {}) -> {} {} ", pt.x, pt.y, cell.neighbors, cell.live);
         println!("{} neighbors ", calc_neighbors(*pt, &ptsWitNeighbors));
     }
