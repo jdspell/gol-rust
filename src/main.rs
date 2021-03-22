@@ -35,33 +35,67 @@ impl Cell {
 
 fn calc_neighbors(pt: Point, map: &HashMap<Point, Cell>) -> i32 {
     let mut num_neighbors = 0;
+    let mut live_neighbors = 0;
     let mut temp_pt = pt;
+    let mut temp_cell;
     // check the following 8 cases
     // x+1, y+1
     temp_pt = Point { x: pt.x+1, y: pt.y+1 };
-    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
+    if map.contains_key(&temp_pt) { 
+        num_neighbors += 1;
+        temp_cell = map.get(&temp_pt).unwrap();
+        live_neighbors += if temp_cell.live { 1 } else { 0 };
+    }
     // x+1, y-1
     temp_pt = Point { x: pt.x+1, y: pt.y-1 };
-    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
+    if map.contains_key(&temp_pt) { 
+        num_neighbors += 1;
+        temp_cell = map.get(&temp_pt).unwrap();
+        live_neighbors += if temp_cell.live { 1 } else { 0 };
+    }
     // x-1, y-1
     temp_pt = Point { x: pt.x-1, y: pt.y-1 };
-    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
+    if map.contains_key(&temp_pt) { 
+        num_neighbors += 1;
+        temp_cell = map.get(&temp_pt).unwrap();
+        live_neighbors += if temp_cell.live { 1 } else { 0 };
+    }
     // x-1, y+1
     temp_pt = Point { x: pt.x-1, y: pt.y+1 };
-    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
+    if map.contains_key(&temp_pt) { 
+        num_neighbors += 1;
+        temp_cell = map.get(&temp_pt).unwrap();
+        live_neighbors += if temp_cell.live { 1 } else { 0 };
+    }
     // x+1, y+0
     temp_pt = Point { x: pt.x+1, y: pt.y };
-    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
+    if map.contains_key(&temp_pt) { 
+        num_neighbors += 1;
+        temp_cell = map.get(&temp_pt).unwrap();
+        live_neighbors += if temp_cell.live { 1 } else { 0 };
+    }
     // x-1, y+0
     temp_pt = Point { x: pt.x-1, y: pt.y };
-    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
+    if map.contains_key(&temp_pt) { 
+        num_neighbors += 1;
+        temp_cell = map.get(&temp_pt).unwrap();
+        live_neighbors += if temp_cell.live { 1 } else { 0 };
+    }
     // x+0, y+1
     temp_pt = Point { x: pt.x, y: pt.y+1 };
-    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
+    if map.contains_key(&temp_pt) { 
+        num_neighbors += 1;
+        temp_cell = map.get(&temp_pt).unwrap();
+        live_neighbors += if temp_cell.live { 1 } else { 0 };
+    }
     // x+0, y-1
     temp_pt = Point { x: pt.x, y: pt.y-1 };
-    num_neighbors += if map.contains_key(&temp_pt) { 1 } else { 0 };
-    println!("Contains key: {} ", map.contains_key(&temp_pt));
+    if map.contains_key(&temp_pt) { 
+        num_neighbors += 1;
+        temp_cell = map.get(&temp_pt).unwrap();
+        live_neighbors += if temp_cell.live { 1 } else { 0 };
+    }
+    println!("Contains key: {}, Live: {}", map.contains_key(&temp_pt), live_neighbors);
     return num_neighbors;
 }
 
